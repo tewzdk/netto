@@ -25,8 +25,12 @@ public class Schedule {
     @Column(name = "shiftresponsibility")
     private String shiftResponsibility;
 
-    @OneToMany(mappedBy = "tasks")
+    @OneToMany(mappedBy = "schedule")
     private List<Task> tasks;
+
+    @OneToMany(mappedBy = "schedule")
     private List<ExtraTask> extraTasks;
+
+    @OneToMany(mappedBy = "schedule")
     private List<Cashier> cashiers;
 }
