@@ -33,4 +33,68 @@ public class Schedule {
 
     @OneToMany(mappedBy = "schedule")
     private List<Cashier> cashiers;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public String getFeedbackMorning() {
+        return feedbackMorning;
+    }
+
+    public void setFeedbackMorning(String feedbackMorning) {
+        this.feedbackMorning = feedbackMorning;
+    }
+
+    public String getFeedbackEvening() {
+        return feedbackEvening;
+    }
+
+    public void setFeedbackEvening(String feedbackEvening) {
+        this.feedbackEvening = feedbackEvening;
+    }
+
+    public String getShiftResponsibility() {
+        return shiftResponsibility;
+    }
+
+    public void setShiftResponsibility(String shiftResponsibility) {
+        this.shiftResponsibility = shiftResponsibility;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public List<ExtraTask> getExtraTasks() {
+        return extraTasks;
+    }
+
+    public void setExtraTasks(List<ExtraTask> extraTasks) {
+        this.extraTasks = extraTasks;
+    }
+
+    public List<Cashier> getCashiers() {
+        return cashiers;
+    }
+
+    public void setCashiers(List<Cashier> cashiers) {
+        this.cashiers = cashiers;
+    }
 }

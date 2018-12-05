@@ -1,6 +1,5 @@
 package netto.demo.service;
 
-import netto.demo.model.ExtraTask;
 import netto.demo.model.Schedule;
 
 import java.util.List;

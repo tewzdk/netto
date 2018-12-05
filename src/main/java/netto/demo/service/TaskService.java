@@ -3,9 +3,11 @@ package netto.demo.service;
 import netto.demo.model.Task;
 import netto.demo.repository.ITaskRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class TaskService implements ITaskService {
 
     @Autowired

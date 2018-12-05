@@ -3,9 +3,11 @@ package netto.demo.service;
 import netto.demo.model.Cashier;
 import netto.demo.repository.ICashierRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CashierService implements ICashierService {
     @Autowired
     ICashierRepo cashierRepo;
