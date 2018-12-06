@@ -80,24 +80,13 @@ public class HomeController {
         List<Task> tasks = taskService.fetchAll();
         model.addAttribute("tasks", tasks);
 
-        //clean list of all needed scheduleTasks
-        List<ScheduleTask> scheduleTasks = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i++) {
-            for (int j = 0; j < tasks.get(i).getScheduleTasks().size(); j++) {
-                if(tasks.get(i).getScheduleTasks().get(j).getSchedule() == schedule){
-                    scheduleTasks.add(tasks.get(i).getScheduleTasks().get(j));
-                }
-            }
-        }
-
-        model.addAttribute("scheduleTasks", scheduleTasks);
         return "schedule";
     }
 
     @PostMapping("/update-task")
-    public String updateTask(@ModelAttribute Schedule schedule){
+    public String updateTask(@ModelAttribute Schedule schedule, @ModelAttribute ScheduleTask scheduleTask){
         int scheduleid = schedule.getId();
-        //scheduleTaskService.save();
+        scheduleTaskService.save(scheduleTask);
         return "redirect:schedule/" + scheduleid;
     }
 
