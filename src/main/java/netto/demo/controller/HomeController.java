@@ -1,7 +1,6 @@
 package netto.demo.controller;
 
 import netto.demo.model.Schedule;
-import netto.demo.model.Task;
 import netto.demo.service.ICashierService;
 import netto.demo.service.IExtraTaskService;
 import netto.demo.service.IScheduleService;
@@ -62,7 +61,7 @@ public class HomeController {
     @GetMapping("/schedule/{id}")
     public String schedule(@PathVariable("id") int id, Model model){
         model.addAttribute("schedule", scheduleService.fetchOne(id));
-        //model.addAttribute("tasks", taskService.fetchAll());
+        model.addAttribute("tasks", taskService.fetchAll());
 
         return "schedule";
     }

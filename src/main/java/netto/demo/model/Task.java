@@ -3,28 +3,41 @@ package netto.demo.model;
 import javax.persistence.*;
 
 @Table(name = "tasks")
-@SecondaryTable(name = "scheduletasks")
 @Entity
 public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(table = "tasks", name = "id")
+    @Column(name = "id")
     private int id;
 
-    @Column(table = "tasks", name = "description")
+    @Column(name = "description")
     private String description;
 
-    @Column(table = "tasks", name = "category")
+    @Column(name = "category")
     private String category;
 
-    @JoinColumn(table = "scheduletasks", name = "responsible")
-    private String responsible;
+    public int getId() {
+        return id;
+    }
 
-    @JoinColumn(table = "scheduletasks", name = "done")
-    private boolean done;
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    @ManyToOne
-    @JoinColumn(table = "scheduletasks", name = "fk_schedules")
-    private Schedule schedule;
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 }

@@ -26,9 +26,6 @@ public class Schedule {
     private String shiftResponsibility;
 
     @OneToMany(mappedBy = "schedule")
-    private List<Task> tasks;
-
-    @OneToMany(mappedBy = "schedule")
     private List<ExtraTask> extraTasks;
 
     @OneToMany(mappedBy = "schedule")
@@ -72,14 +69,6 @@ public class Schedule {
 
     public void setShiftResponsibility(String shiftResponsibility) {
         this.shiftResponsibility = shiftResponsibility;
-    }
-
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
     }
 
     public List<ExtraTask> getExtraTasks() {
