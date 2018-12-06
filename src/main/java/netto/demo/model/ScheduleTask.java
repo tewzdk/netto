@@ -64,4 +64,14 @@ public class ScheduleTask {
     public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
     }
+
+    public ScheduleTask(String responsible, boolean done, Task task, Schedule schedule) {
+        this.responsible = responsible;
+        this.done = done;
+        this.task = task;
+        this.schedule = schedule;
+    }
+
+    public ScheduleTask() {
+    }
 }

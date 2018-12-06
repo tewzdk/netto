@@ -1,12 +1,13 @@
 package netto.demo.service;
 
-import netto.demo.model.Schedule;
 import netto.demo.model.ScheduleTask;
 import netto.demo.repository.IScheduleTaskRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ScheduleTaskService implements IScheduleTaskService {
     @Autowired
     IScheduleTaskRepo scheduleTaskRepo;

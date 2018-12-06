@@ -53,14 +53,15 @@ public class Task {
         this.category = category;
     }
 
-    public int getScheduleTaskId(int id) {
-        int indexNo = -1;
+    public ScheduleTask getScheduleTask(int id) {
+        ScheduleTask scheduleTask;
         for (int i = 0; i < scheduleTasks.size(); i++) {
             if(scheduleTasks.get(i).getSchedule().getId() == id){
-                indexNo = i;
+                scheduleTask = scheduleTasks.get(i);
+                return scheduleTask;
             }
         }
 
-        return indexNo;
+        return null;
     }
 }

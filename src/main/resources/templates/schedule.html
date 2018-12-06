@@ -9,13 +9,29 @@
     <link rel="stylesheet" href="../stylesheets/bootstrap.css">
     <title>Netto</title>
 </head>
-<body>
-<div class="container">
-    <p th:text="${schedule.shiftResponsibility}"></p>
-    <form th:each="task: ${tasks}">
-        <p th:text="${task.description}"></p>
-    </form>
-
+<body class="bg-light">
+<div class="container bg-white shadow">
+    <table class="table">
+        <thead>
+            <th>#</th>
+            <th>Kategori</th>
+            <th>Beskrivelse</th>
+            <th>Færdig</th>
+            <th>Ansvarlig</th>
+        </thead>
+        <tbody>
+            <tr th:each="task: ${tasks}">
+                <th th:text="${task.id}"></th>
+                <td th:text="${task.category}"></td>
+                <td th:text="${task.description}"></td>
+                <form action="update-task" method="post">
+                    <td><input class="input-group form-check-input" type="checkbox" name="done"></td>
+                    <td><input class="input-group text-center" type="text" placeholder="ansvarlig" name="responsible"></td>
+                    <td><button class="btn btn-primary" type="submit">gem</button></td>
+                </form>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 <!-- Optional JavaScript -->
