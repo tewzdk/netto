@@ -52,4 +52,15 @@ public class Task {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    public int getScheduleTaskId(int id) {
+        int indexNo = -1;
+        for (int i = 0; i < scheduleTasks.size(); i++) {
+            if(scheduleTasks.get(i).getSchedule().getId() == id){
+                indexNo = i;
+            }
+        }
+
+        return indexNo;
+    }
 }
