@@ -31,6 +31,17 @@ public class Schedule {
     @OneToMany(mappedBy = "schedule")
     private List<Cashier> cashiers;
 
+    @OneToMany (mappedBy = "schedule")
+    private List<ScheduleTask> scheduleTasks;
+
+    public List<ScheduleTask> getScheduleTasks() {
+        return scheduleTasks;
+    }
+
+    public void setScheduleTasks(List<ScheduleTask> scheduleTasks) {
+        this.scheduleTasks = scheduleTasks;
+    }
+
     public int getId() {
         return id;
     }
