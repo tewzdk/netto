@@ -20,13 +20,16 @@
             <th>Ansvarlig</th>
         </thead>
         <tbody>
-            <tr th:each="task: ${tasks}">
-                <th th:text="${task.id}"></th>
-                <td th:text="${task.category}"></td>
-                <td th:text="${task.description}"></td>
-                <form action="update-task" method="post">
-                    <td><input class="input-group form-check-input" type="checkbox" name="done"></td>
-                    <td><input class="input-group text-center" type="text" placeholder="ansvarlig" name="responsible"></td>
+            <tr th:each="scheduleTask: ${schedule.scheduleTasks}">
+                <th th:text="${scheduleTask.task.id}"></th>
+                <td th:text="${scheduleTask.task.category}"></td>
+                <td th:text="${scheduleTask.task.description}"></td>
+                <form action="/update-task" method="post">
+                    <td><input hidden th:name="id" th:value="${scheduleTask.id}"></td>
+                    <td><input hidden th:name="taskId" th:value="${scheduleTask.task.id}"></td>
+                    <td><input hidden th:name="scheduleId" th:value="${scheduleTask.schedule.id}"></td>
+                    <td><input th:checked="${scheduleTask.done}" class="input-group form-check-input" type="checkbox" name="done"></td>
+                    <td><input th:value="${scheduleTask.responsible}" class="input-group text-center" type="text" placeholder="ansvarlig" name="responsible"></td>
                     <td><button class="btn btn-outline-success" type="submit">✔</button></td>
                 </form>
             </tr>

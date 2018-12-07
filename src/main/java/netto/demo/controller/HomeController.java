@@ -69,6 +69,8 @@ public class HomeController {
             tasks.get(i).setScheduleTasks(tempList);
         }
 
+        // TODO: 07-12-2018 make another proper scheduletask populator.
+
         int id = schedule.getId();
         return "redirect:schedule/" + id;
     }
@@ -77,17 +79,15 @@ public class HomeController {
     public String schedule(@PathVariable("id") int id, Model model, @ModelAttribute Schedule schedule){
         model.addAttribute("schedule", scheduleService.fetchOne(id));
 
-        List<Task> tasks = taskService.fetchAll();
-        model.addAttribute("tasks", tasks);
-
         return "schedule";
     }
 
     @PostMapping("/update-task")
-    public String updateTask(@ModelAttribute Schedule schedule, @ModelAttribute ScheduleTask scheduleTask){
-        int scheduleid = schedule.getId();
+    public String updateTask(@RequestParam("taskId") int taskId, @RequestParam("scheduleId") int scheduleId, @ModelAttribute ScheduleTask scheduleTask){
+        scheduleTask.setTask(taskService.fetchOne(taskId));
+        scheduleTask.setSchedule(scheduleService.fetchOne(scheduleId));
         scheduleTaskService.save(scheduleTask);
-        return "redirect:schedule/" + scheduleid;
+        return "redirect:/schedule/" + scheduleId;
     }
 
 }
