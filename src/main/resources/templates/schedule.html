@@ -36,14 +36,15 @@
         </tbody>
     </table>
     <hr>
-    <form action="">
-        <div class="text-center">
-            <form th:each="cashier: ${schedule.cashiers}" method="post" action="/update-cashier">
+
+    <div th:each="cashier: ${schedule.cashiers}" class="text-center">
+        <form method="post" action="/update-cashier">
+            <input hidden th:name="id" th:value="${cashier.id}">
             <input class="input-group mb-4" th:value="${cashier.name}" name="name">
+            <input hidden th:name="schedule" th:field="${schedule}">
             <button class="btn btn-primary mb-3" type="submit">gem</button>
-            </form>
-        </div>
-    </form>
+        </form>
+    </div>
     <form action="/update-schedule" method="post">
         <input hidden th:value="${schedule.id}" name="id">
         <input hidden th:value="${schedule.date}" type="date" name="date">

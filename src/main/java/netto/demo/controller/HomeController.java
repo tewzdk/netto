@@ -105,7 +105,8 @@ public class HomeController {
 
     @PostMapping("/update-cashier")
     public String updateCashier(@ModelAttribute Cashier cashier){
-        return "";
+        cashierService.save(cashier);
+        return "redirect:/";
     }
 
     @PostMapping("/update-task")
