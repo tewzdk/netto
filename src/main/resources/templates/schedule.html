@@ -11,17 +11,17 @@
 </head>
 <body class="bg-light">
 <div class="container bg-white shadow">
-    <table class="table">
+    <table class="table table-responsive small">
         <thead>
-            <th>#</th>
-            <th>Kategori</th>
-            <th>Beskrivelse</th>
-            <th>Færdig</th>
-            <th>Ansvarlig</th>
+            <th scope="col">#</th>
+            <th scope="col">Kategori</th>
+            <th scope="col">Beskrivelse</th>
+            <th scope="col">Færdig</th>
+            <th scope="col">Ansvarlig</th>
         </thead>
         <tbody>
             <tr th:each="scheduleTask: ${schedule.scheduleTasks}">
-                <th th:text="${scheduleTask.task.id}"></th>
+                <th scope="row" th:text="${scheduleTask.task.id}"></th>
                 <td th:text="${scheduleTask.task.category}"></td>
                 <td th:text="${scheduleTask.task.description}"></td>
                 <form action="/update-task" method="post">
@@ -29,7 +29,7 @@
                     <td><input hidden th:name="taskId" th:value="${scheduleTask.task.id}"></td>
                     <td><input hidden th:name="scheduleId" th:value="${scheduleTask.schedule.id}"></td>
                     <td><input th:checked="${scheduleTask.done}" class="input-group form-check-input" type="checkbox" name="done"></td>
-                    <td><input th:value="${scheduleTask.responsible}" class="input-group text-center" type="text" placeholder="ansvarlig" name="responsible"></td>
+                    <td><input th:value="${scheduleTask.responsible}" class="input-group text-center" type="text" name="responsible"></td>
                     <td><button class="btn btn-outline-success" type="submit">✔</button></td>
                 </form>
             </tr>
@@ -38,14 +38,20 @@
     <hr>
     <form action="">
         <div class="text-center">
-            <input class="input-group mb-4" value="Kassemedarbejder #1">
-            <input class="input-group mb-4" value="Kassemedarbejder #2">
-            <input class="input-group mb-4" value="Kassemedarbejder #3">
-            <input class="input-group mb-4" value="Kassemedarbejder #4">
+            <form th:each="cashier: ${schedule.cashiers}" method="post" action="/update-cashier">
+            <input class="input-group mb-4" th:value="${cashier.name}" name="name">
             <button class="btn btn-primary mb-3" type="submit">gem</button>
+            </form>
         </div>
     </form>
-
+    <form action="/update-schedule" method="post">
+        <input hidden th:value="${schedule.id}" name="id">
+        <input hidden th:value="${schedule.date}" type="date" name="date">
+        <input hidden th:value="${schedule.shiftResponsibility}" name="shiftResponsibility">
+        <input type="text" placeholder="Morgenfeedback" th:value="${schedule.feedbackMorning}" name="feedbackMorning">
+        <input type="text" placeholder="Aftenfeedback" th:value="${schedule.feedbackEvening}" name="feedbackEvening">
+        <button class="btn btn-primary mb-3" type="submit">gem</button>
+    </form>
 </div>
 
 <!-- Optional JavaScript -->

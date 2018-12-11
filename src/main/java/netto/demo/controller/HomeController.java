@@ -1,5 +1,6 @@
 package netto.demo.controller;
 
+import netto.demo.model.Cashier;
 import netto.demo.model.Schedule;
 import netto.demo.model.ScheduleTask;
 import netto.demo.model.Task;
@@ -49,18 +50,20 @@ public class HomeController {
 
     @PostMapping("/create-schedule")
     public String createSchedule(@ModelAttribute Schedule schedule, Model model){
-        schedule.setFeedbackMorning(" ");
-        schedule.setFeedbackEvening(" ");
         schedule.setDate(LocalDate.now());
         model.addAttribute("schedule", schedule);
+
         scheduleService.save(schedule);
 
         List<Task> tasks = taskService.fetchAll();
         model.addAttribute("tasks", tasks);
 
+
+
         boolean done = false;
         String responsible = "";
 
+        //adding empty list of scheduleTasks
         for (int i = 0; i < tasks.size(); i++) {
             ScheduleTask scheduleTask = new ScheduleTask(responsible, done, tasks.get(i), schedule);
             scheduleTaskService.save(scheduleTask);
@@ -71,7 +74,19 @@ public class HomeController {
 
         // TODO: 07-12-2018 make another proper scheduletask populator.
 
+        //adding empty list of cashiers
+        List<Cashier> cashiers = new ArrayList<>();
+        for (int i = 0; i < 4; i++) { //4 can be changed to a dynamic size
+            Cashier cashier = new Cashier();
+            cashier.setSchedule(schedule);
+            cashier.setName("Kasse: " + (i+1));
+            cashierService.save(cashier);
+            cashiers.add(new Cashier());
+        }
+        schedule.setCashiers(cashiers);
+
         int id = schedule.getId();
+
         return "redirect:schedule/" + id;
     }
 
@@ -80,6 +95,17 @@ public class HomeController {
         model.addAttribute("schedule", scheduleService.fetchOne(id));
 
         return "schedule";
+    }
+
+    @PostMapping("/update-schedule")
+    public String updateSchedule(@ModelAttribute Schedule schedule){
+        scheduleService.save(schedule);
+        return "redirect:/schedule/" + schedule.getId();
+    }
+
+    @PostMapping("/update-cashier")
+    public String updateCashier(@ModelAttribute Cashier cashier){
+        return "";
     }
 
     @PostMapping("/update-task")
