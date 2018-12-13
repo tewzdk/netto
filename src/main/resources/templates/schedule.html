@@ -20,10 +20,10 @@
             <th scope="col">Ansvarlig</th>
         </thead>
         <tbody>
-            <tr th:each="scheduleTask: ${schedule.scheduleTasks}">
-                <th scope="row" th:text="${scheduleTask.task.id}"></th>
-                <td th:text="${scheduleTask.task.category}"></td>
-                <td th:text="${scheduleTask.task.description}"></td>
+            <tr th:each="scheduleTask: ${schedule.scheduleTasks}" >
+                <th scope="row" th:text="${scheduleTask.task.id}" th:style="${scheduleTask.isDone()} ? 'color:#a9a9a9;' : 'color:black;'" ></th>
+                <td th:text="${scheduleTask.task.category}"  th:style="${scheduleTask.isDone()} ? 'color:#a9a9a9;' : 'color:black;'"></td>
+                <td th:text="${scheduleTask.task.description}" th:style="${scheduleTask.isDone()} ? 'color:#a9a9a9;' : 'color:black;'"></td>
                 <form action="/update-task" method="post">
                     <td><input hidden th:name="id" th:value="${scheduleTask.id}"></td>
                     <td><input hidden th:name="taskId" th:value="${scheduleTask.task.id}"></td>
