@@ -7,46 +7,67 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="stylesheets/bootstrap.css">
+    <link rel="stylesheet" href="stylesheets/main.css">
     <title>Netto</title>
 </head>
 <body class="bg-light">
-<div class="container bg-white shadow">
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createScheduleModal">
-        Opret nyt skema
-    </button>
+<div class="container bg-white shadow mt-3">
+    <nav class="navbar navbar-light bg-white">
+        <div class="mb-1">
+            <a class="navbar-brand d-inline-block" href="/">
+                <img src="../images/netto-logo.svg" width="150" class="d-inline-block align-top" alt="">
+            </a>
+        </div>
+        <div class="form-inline">
+            <input id="search-input" class="form-control mr-sm-2" type="search" placeholder="Søg efter skema" aria-label="Search">
+        </div>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#createScheduleModal">
+            Opret nyt skema
+        </button>
 
-    <!-- Modal -->
-    <div class="modal fade" id="createScheduleModal" tabindex="-1" role="dialog" aria-labelledby="scheduleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="scheduleModalLabel" th:text="'Opret skema (' + ${date} + ')'"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+        <!-- Modal -->
+        <div class="modal fade" id="createScheduleModal" tabindex="-1" role="dialog" aria-labelledby="scheduleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="scheduleModalLabel" th:text="'Opret skema (' + ${date} + ')'"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="/create-schedule" method="post">
+                        <div class="modal-body text-center">
+                            <input placeholder="Ansvarlig" type="text" name="shiftResponsibility">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Luk</button>
+                            <button type="submit" class="btn btn-primary">Gem</button>
+                        </div>
+                    </form>
                 </div>
-                <form action="/create-schedule" method="post">
-                <div class="modal-body text-center">
-                    <input placeholder="Ansvarlig" type="text" name="shiftResponsibility">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Luk</button>
-                    <button type="submit" class="btn btn-primary">Gem</button>
-                </div>
-                </form>
             </div>
         </div>
+    </nav>
+    <div id="no-search-results" class="text-center mb-3" style="display: none;">Ingen skemaer matchede din søgning...</div>
+    <div class="table-responsive">
+    <table id="schedule-table" class="table table-hover">
+        <caption id="schedule-table-caption" class="no-search-results">Liste over alle skemaer</caption> <!--value also exists in search.js, todo init with the search-->
+        <thead id="schedule-table-head" class="no-search-results">
+        <th id="responsible" scope="col"><span class="pointer">Ansvarlig</span></th>
+        <th id="dayOfWeek" scope="col"><span class="pointer">Ugedag</span></th>
+        <th id="date" scope="col"><span class="pointer">Dato</span></th>
+        </thead>
+        <tbody id="schedule-table-body">
+        <tr class="clickable-row" th:data-href="${'/schedule/' + schedule.id}" th:each="schedule: ${schedules}">
+            <td th:text="${schedule.shiftResponsibility}"></td>
+            <td th:text="${schedule.dayOfWeek}"></td>
+            <td th:text="${#temporals.format(schedule.date, 'dd-MM-yyyy')}|"></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
     </div>
-
-
-
-
-    <ul class="list-group">
-        <li th:each="schedule: ${schedules}" class="list-group-item text-center">
-            <a th:text="${schedule.dayOfWeek} + ' ' + ${#temporals.format(schedule.date, 'dd-MM-yyyy')}|" href="/schedule/"></a>
-        </li>
-    </ul>
 </div>
 
 <!-- Optional JavaScript -->
@@ -54,5 +75,7 @@
 <script src="scripts/jquery.min.js"></script>
 <script src="scripts/popper.min.js"></script>
 <script src="scripts/bootstrap.min.js"></script>
+<script src="scripts/search.js"></script>
+<script src="scripts/table-interactions.js"></script>
 </body>
 </html>

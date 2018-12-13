@@ -112,19 +112,19 @@ public class Schedule {
     public void setDayOfWeek(){
         String day = this.date.getDayOfWeek().name();
         switch (day.toLowerCase()) {
-            case "monday": this.dayOfWeek = "mandag";
+            case "monday": this.dayOfWeek = "Mandag";
                 break;
-            case "tuesday": this.dayOfWeek = "tirsdag";
+            case "tuesday": this.dayOfWeek = "Tirsdag";
                 break;
-            case "wednesday": this.dayOfWeek = "onsdag";
+            case "wednesday": this.dayOfWeek = "Onsdag";
                 break;
-            case "thursday": this.dayOfWeek = "torsdag";
+            case "thursday": this.dayOfWeek = "Torsdag";
                 break;
-            case "friday": this.dayOfWeek = "fredag";
+            case "friday": this.dayOfWeek = "Fredag";
                 break;
-            case "saturday": this.dayOfWeek = "lørdag";
+            case "saturday": this.dayOfWeek = "Lørdag";
                 break;
-            case "sunday": this.dayOfWeek = "søndag";
+            case "sunday": this.dayOfWeek = "Søndag";
                 break;
         }
 

@@ -10,14 +10,17 @@
     <title>Netto</title>
 </head>
 <body class="bg-light">
-<div class="container bg-white shadow">
+<div class="container bg-white shadow mt-3">
     <table class="table table-responsive small">
         <thead>
+        <tr>
             <th scope="col">#</th>
             <th scope="col">Kategori</th>
             <th scope="col">Beskrivelse</th>
             <th scope="col">Færdig</th>
             <th scope="col">Ansvarlig</th>
+            <th scope="col"></th>
+        </tr>
         </thead>
         <tbody>
             <tr th:each="scheduleTask: ${schedule.scheduleTasks}" >
@@ -25,10 +28,10 @@
                 <td th:text="${scheduleTask.task.category}"  th:style="${scheduleTask.isDone()} ? 'color:#a9a9a9;' : 'color:black;'"></td>
                 <td th:text="${scheduleTask.task.description}" th:style="${scheduleTask.isDone()} ? 'color:#a9a9a9;' : 'color:black;'"></td>
                 <form action="/update-task" method="post">
-                    <td><input hidden th:name="id" th:value="${scheduleTask.id}"></td>
-                    <td><input hidden th:name="taskId" th:value="${scheduleTask.task.id}"></td>
-                    <td><input hidden th:name="scheduleId" th:value="${scheduleTask.schedule.id}"></td>
-                    <td><input th:checked="${scheduleTask.done}" class="input-group form-check-input" type="checkbox" name="done"></td>
+                    <input hidden th:name="id" th:value="${scheduleTask.id}">
+                    <input hidden th:name="taskId" th:value="${scheduleTask.task.id}">
+                    <input hidden th:name="scheduleId" th:value="${scheduleTask.schedule.id}">
+                    <td align="right"><input th:checked="${scheduleTask.done}" class="input-group form-check-input" type="checkbox" name="done"></td>
                     <td><input th:value="${scheduleTask.responsible}" class="input-group text-center" type="text" name="responsible"></td>
                     <td><button class="btn btn-outline-success" type="submit">✔</button></td>
                 </form>
