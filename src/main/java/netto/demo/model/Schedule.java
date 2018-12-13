@@ -19,6 +19,9 @@ public class Schedule {
     @Column(name = "date")
     private LocalDate date;
 
+    @Transient
+    private String dayOfWeek;
+
     @Column(name = "feedbackmorning")
     private String feedbackMorning;
 
@@ -61,6 +64,10 @@ public class Schedule {
         this.date = date;
     }
 
+    public String getDayOfWeek() {
+        return dayOfWeek;
+    }
+
     public String getFeedbackMorning() {
         return feedbackMorning;
     }
@@ -99,5 +106,28 @@ public class Schedule {
 
     public void setCashiers(List<Cashier> cashiers) {
         this.cashiers = cashiers;
+    }
+
+    @PostLoad
+    public void setDayOfWeek(){
+        String day = this.date.getDayOfWeek().name();
+        switch (day.toLowerCase()) {
+            case "monday": this.dayOfWeek = "mandag";
+                break;
+            case "tuesday": this.dayOfWeek = "tirsdag";
+                break;
+            case "wednesday": this.dayOfWeek = "onsdag";
+                break;
+            case "thursday": this.dayOfWeek = "torsdag";
+                break;
+            case "friday": this.dayOfWeek = "fredag";
+                break;
+            case "saturday": this.dayOfWeek = "lørdag";
+                break;
+            case "sunday": this.dayOfWeek = "søndag";
+                break;
+        }
+
+
     }
 }

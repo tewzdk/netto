@@ -44,7 +44,7 @@
 
     <ul class="list-group">
         <li th:each="schedule: ${schedules}" class="list-group-item text-center">
-            <a th:text="${schedule.date}" th:href="${'/schedule/' + schedule.id}"></a>
+            <a th:text="${schedule.dayOfWeek} + ' ' + ${#temporals.format(schedule.date, 'dd-MM-yyyy')}|" href="/schedule/"></a>
         </li>
     </ul>
 </div>
