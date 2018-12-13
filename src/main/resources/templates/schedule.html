@@ -40,6 +40,7 @@
     <div th:each="cashier: ${schedule.cashiers}" class="text-center">
         <form method="post" action="/update-cashier">
             <input hidden th:name="id" th:value="${cashier.id}">
+            <input hidden th:name="scheduleFkId" th:value="${cashier.schedule.id}">
             <input class="input-group mb-4" th:value="${cashier.name}" name="name">
             <input hidden th:name="schedule" th:field="${schedule}">
             <button class="btn btn-primary mb-3" type="submit">gem</button>

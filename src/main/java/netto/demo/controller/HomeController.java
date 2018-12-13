@@ -5,6 +5,12 @@ import netto.demo.model.Schedule;
 import netto.demo.model.ScheduleTask;
 import netto.demo.model.Task;
 import netto.demo.service.*;
+import netto.demo.model.ScheduleTask;
+import netto.demo.model.Task;
+import netto.demo.service.ICashierService;
+import netto.demo.service.IExtraTaskService;
+import netto.demo.service.IScheduleService;
+import netto.demo.service.ITaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -104,9 +110,10 @@ public class HomeController {
     }
 
     @PostMapping("/update-cashier")
-    public String updateCashier(@ModelAttribute Cashier cashier){
+    public String updateCashier(@ModelAttribute Cashier cashier, @RequestParam("scheduleFkId") int scheduleId){
+        cashier.setSchedule(scheduleService.fetchOne(scheduleId));
         cashierService.save(cashier);
-        return "redirect:/";
+        return "redirect:/schedule/"+scheduleId;
     }
 
     @PostMapping("/update-task")
@@ -115,6 +122,12 @@ public class HomeController {
         scheduleTask.setSchedule(scheduleService.fetchOne(scheduleId));
         scheduleTaskService.save(scheduleTask);
         return "redirect:/schedule/" + scheduleId;
+    }
+
+    @PostMapping("/post")
+    public String schedule(){
+return "";
+
     }
 
 }
