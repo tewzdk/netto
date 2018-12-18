@@ -7,6 +7,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../stylesheets/bootstrap.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+
     <title>Netto</title>
 </head>
 <body class="bg-light">
@@ -39,7 +41,7 @@
                     <input hidden th:name="scheduleId" th:value="${scheduleTask.schedule.id}">
                     <td align="right"><input th:checked="${scheduleTask.done}" class="input-group form-check-input" type="checkbox" name="done"></td>
                     <td><input th:value="${scheduleTask.responsible}" class="input-group text-center" type="text" name="responsible"></td>
-                    <td><button class="btn btn-outline-success btn-sm" type="submit">✔</button></td>
+                    <td><button class="btn btn-outline-success btn-sm" type="submit"><i class="fas fa-check"></i></button></td>
                 </form>
             </tr>
         </tbody>
@@ -56,7 +58,7 @@
             </div>
             <input class="form-control" th:value="${cashier.name}" name="name">
             <input hidden th:name="schedule" th:field="${schedule}">
-            <button class="btn btn-outline-success btn-sm d-inline-block" type="submit">✔</button>
+            <button class="btn btn-outline-success btn-sm d-inline-block" type="submit"><i class="fas fa-check"></i></button>
             </div>
         </form>
     </div>
@@ -70,7 +72,7 @@
         <label class="small w-100">Aftenfeedback</label>
         <textarea class="w-75 mb-2 small" type="text" rows="5" th:text="${schedule.feedbackEvening}" name="feedbackEvening"></textarea>
         <br>
-        <button class="btn btn-outline-success btn-sm mb-3" type="submit">✔</button>
+        <button class="btn btn-outline-success btn-sm mb-3" type="submit"><i class="fas fa-check"></i></button>
     </form>
     </div>
 </div>
