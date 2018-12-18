@@ -87,7 +87,6 @@ public class HomeController {
         for (int i = 0; i < 4; i++) { //4 can be changed to a dynamic size
             Cashier cashier = new Cashier();
             cashier.setSchedule(schedule);
-            cashier.setName("Kasse: " + (i+1));
             cashierService.save(cashier);
             cashiers.add(new Cashier());
         }
